@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- 字體 （google front LXGW WenKai TC Static） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+
+    <style>
+        .back-home {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-home a {
+            text-decoration: none;
+            color: white;
+            background-color: #264653;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .back-home a:hover {
+            background-color: #2A9D8F;
+        }
+    </style>
+</head>
+<body>
+    <div class="lower_container">
+        <h1>健康建議</h1>
+
+        <!--血壓建議-->
+        <div class="advice-container">
+            <div class="advice-section">
+                <h2>Blood Pressure:</h2>
+                {% if fontLargestStrong.blood_pressure or fontSecondStrong.blood_pressure or fontNormalStrong.blood_pressure or fontNormal.blood_pressure %}
+                    <div class="advice">
+                        <ul class="font-largest-strong">
+                            {% for advice in fontLargestStrong.blood_pressure %}
+                                <li><strong>{{ advice }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-second-strong">
+                            {% for advice in fontSecondStrong.blood_pressure[:1] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal-strong">
+                            {% for advice in fontNormalStrong.blood_pressure[:2] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-second-strong">
+                            {% for advice in fontSecondStrong.blood_pressure[1:] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal-strong">
+                            {% for advice in fontNormalStrong.blood_pressure[2:] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal">
+                            {% for advice in fontNormal.blood_pressure %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            
+
+            <!-- 血糖建議 -->
+            <div class="advice-section">
+                <h2>Blood Sugar:</h2>
+                {% if fontLargestStrong.blood_sugar or fontSecondStrong.blood_sugar or fontNormalStrong.blood_sugar or fontNormal.blood_sugar %}
+                    <div class="advice">
+                        <ul class="font-largest-strong">
+                            {% for advice in fontLargestStrong.blood_sugar %}
+                                <li><strong>{{ advice }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-second-strong">
+                            {% for advice in fontSecondStrong.blood_sugar[:1] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal-strong">
+                            {% for advice in fontNormalStrong.blood_sugar[:3] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-second-strong">
+                            {% for advice in fontSecondStrong.blood_sugar[1:] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal-strong">
+                            {% for advice in fontNormalStrong.blood_sugar[3:] %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="font-normal">
+                            {% for advice in fontNormal.blood_sugar %}
+                                <li>{{ advice }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- 加入了解 GI 值的按鈕 -->
+                    {% if '血糖太高>140' in fontLargestStrong.blood_sugar[0] %}
+                    <div class="gi-link">
+                        <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+
+            <!-- BMI 建議 -->
+<!-- BMI 建議 -->
+<!-- BMI 建議 -->
+<div class="advice-section">
+    <h2>BMI:</h2>
+    {% if fontLargestStrong.bmi or fontSecondStrong.bmi or fontNormalStrong.bmi or fontNormal.bmi %}
+        <div class="advice">
+            <!-- font-largest-strong -->
+            <ul class="font-largest-strong">
+                {% for advice in fontLargestStrong.bmi %}
+                    <li><strong>{{ advice }}</strong></li>
+                {% endfor %}
+            </ul>
+
+            <!-- font-second-strong -->
+            <ul class="font-second-strong">
+                {% for advice in fontSecondStrong.bmi %}
+                    <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- font-normal-strong -->
+            <ul class="font-normal-strong">
+                {% for advice in fontNormalStrong.bmi %}
+                    <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- font-normal -->
+            <ul class="font-normal">
+                {% for advice in fontNormal.bmi %}
+                    <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+
+
+        </div>
+
+        <!-- 回主頁按鈕 -->
+        <div class="aling_two_buttom">
+            <div class="back-home">
+                <a href="{{ url_for('index') }}">返回主頁</a>
+            </div>
+            <div class="back-home">
+                <a href="{{ url_for('info') }}">改善資訊</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

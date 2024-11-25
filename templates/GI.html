@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GI 值介紹</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="lower_container">
+        <h1>GI 值介紹</h1>
+        <p>GI 值（Glycemic Index，升糖指數）是衡量食物對血糖影響的指標。食物的 GI 值越高，意味著它會更快速地提高血糖。</p>
+
+        <h2>低 GI 食物</h2>
+        <p>低於 55 的 GI 值食物可以穩定血糖，包括：糙米、燕麥、山藥、部分蔬菜、水果（如芭樂、木瓜）等。</p>
+
+        <h2>高 GI 食物</h2>
+        <p>GI 值高於 70 的食物容易使血糖迅速上升，包括：白米、白麵包、糖果等。</p>
+
+        <div class="back-home">
+            <a href="{{ url_for('index') }}">返回主頁</a>
+        </div>
+    </div>
+</body>
+</html>
