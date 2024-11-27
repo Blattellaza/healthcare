@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
+DATABASE = 'database.db'  # 資料庫檔案路徑
 
 # 設定健康建議的函數
 def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height, weight):
@@ -96,9 +99,14 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
 
 
 # 主頁面路由
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/")
 def index():
-    return render_template('index.html')
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, problem_subject, problem_type, problem_lastEditDate, problem_status FROM HealthQA ORDER BY problem_lastEditDate DESC")
+    questions = cursor.fetchall()
+    conn.close()
+    return render_template("index.html", questions=questions)
 
 # 結果頁面路由
 @app.route('/result', methods=['POST'])
@@ -129,6 +137,56 @@ def GI():
 @app.route('/info', methods=['GET', 'POST'])
 def info():
     return render_template('info.html')
+
+@app.route("/ask", methods=["GET", "POST"])
+def ask():
+    if request.method == "POST":
+        problem_subject = request.form["subject"]
+        problem_detail = request.form["detail"]
+        problem_type = request.form["type"]
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO HealthQA (problem_subject, problem_detail, problem_type) 
+            VALUES (?, ?, ?)
+        """, (problem_subject, problem_detail, problem_type))
+        conn.commit()
+        conn.close()
+        return redirect(url_for("index"))
+    return render_template("ask.html")
+
+@app.route("/question/<int:question_id>", methods=["GET", "POST"])
+def question_detail(question_id):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+
+    # 獲取問題詳細資訊
+    cursor.execute("SELECT id, problem_subject, problem_detail, answer_detail, problem_status FROM HealthQA WHERE id = ?", (question_id,))
+    question = cursor.fetchone()
+
+    if request.method == "POST":  # 處理新增回答
+        answer = request.form["answer"]
+        cursor.execute("""
+            UPDATE HealthQA 
+            SET answer_detail = ?, answer_lastEditDate = ?, problem_status = '已解決'
+            WHERE id = ?
+        """, (answer, datetime.now(), question_id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for("question_detail", question_id=question_id))
+
+    conn.close()
+    return render_template("question_detail.html", question=question)
+
+@app.route("/delete/<int:question_id>", methods=["POST"])
+def delete_question(question_id):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM HealthQA WHERE id = ?", (question_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("index"))
+
 
 
 if __name__ == '__main__':

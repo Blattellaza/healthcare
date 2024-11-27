@@ -18,6 +18,7 @@
         <div class="anime-text">
             健康助手
         </div>
+        <!-- <h6>你最值得信賴的健康好夥伴104104104</h6> -->
     </div>
 
     <div class="lower_container_index">
@@ -58,5 +59,33 @@
 
         
     </div>
+
+    <div class = "problem_container">
+        <div id="health-qa">
+            <h2>健康問答</h2>
+            <div class="qa-header">
+                <span>提問主旨</span>
+                <span>類型</span>
+                <span>最後更新時間</span>
+                <span>狀態</span>
+                <span>操作</span>
+            </div>
+            <div class="qa-row">
+                {% for question in questions %}
+                <div class="qa-item">
+                    <span>{{ question[1] }}</span> <!-- 類型 -->
+                    <span>{{ question[2] }}</span> <!-- 類型 -->
+                    <span>{{ question[3] }}</span> <!-- 最後更新時間 -->
+                    <span>{{ question[4] }}</span> <!-- 狀態 -->
+                    <span><a href="/question/{{ question[0] }}">查看問題</a></span>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="/ask" class="btn">我要發問</a>
+        </div>
+    </div>
+    
+    
+    
 </body>
 </html>

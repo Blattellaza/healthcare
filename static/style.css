@@ -45,10 +45,10 @@ body {
     justify-content: flex-end;  /* 將內容對齊到底部 */
     text-align: center;
     color: #ffffff;
-    font-size: 3.5em;
+    font-size: 3.5em; 
     font-weight: bold;
-
 }
+
 .lower_container {
     width: 100%;
     display: flex;
@@ -208,4 +208,35 @@ button:hover {/*滑鼠停留在button上的顏色*/
 .background {
     background-color: #ccc;
     margin-bottom: 10px;
+}
+
+.problem_container{
+    width: 100%;
+    height: 100%;
+}
+#health-qa {
+    margin: 20px;
+    padding: 20px;
+    background: lightgray;
+}
+
+.qa-header, .qa-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.qa-header {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+.qa-item span {
+    flex: 1; /* 平均分配空間 */
+    text-align: left;
+}
+
+.qa-item span:last-child {
+    text-align: right; /* 將操作按鈕靠右對齊 */
 }

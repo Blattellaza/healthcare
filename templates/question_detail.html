@@ -1,0 +1,17 @@
+<h2>{{ question[1] }}</h2> <!-- 問題主旨 -->
+<p>{{ question[2] }}</p> <!-- 問題詳細敘述 -->
+
+{% if question[3] %}
+    <h3>回答：</h3>
+    <p>{{ question[3] }}</p> <!-- 回答內容 -->
+{% else %}
+    <h3>尚未有回答</h3>
+    <form method="POST">
+        <textarea name="answer" placeholder="輸入您的回答" required></textarea>
+        <button type="submit">提交回答</button>
+    </form>
+{% endif %}
+<form method="POST" action="/delete/{{ question[0] }}">
+    <button type="submit" class="btn-danger">刪除此問題</button>
+</form>
+

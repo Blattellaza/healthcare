@@ -1,0 +1,16 @@
+<form method="POST">
+    <label for="subject">問題主旨：</label>
+    <input type="text" name="subject" id="subject" required>
+    
+    <label for="detail">問題詳細敘述：</label>
+    <textarea name="detail" id="detail" required></textarea>
+    
+    <label for="type">問題類型：</label>
+    <select name="type" id="type">
+        <option value="一般健康">一般健康</option>
+        <option value="慢性病">慢性病</option>
+        <option value="其他">其他</option>
+    </select>
+    
+    <button type="submit">發佈</button>
+</form>
