@@ -1,33 +1,49 @@
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Monitor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .question_display_container{
+            background: lightgray;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+
 </head>
 <body>
-    <h2>{{ question[1] }}</h2> <!-- 問題主旨 -->
-    <p>{{ question[2] }}</p> <!-- 問題詳細敘述 -->
+    <div class = "question_display_container">
+        <h2>提問主旨：{{ question[1] }}</h2>
+        <h7>類型：</h7>
+        <h7>{{ question[6] }}</h7><br>
+        <h3>問題詳細敘述：</h3><br>
+        <p>{{ question[2] }}</p> <!-- 問題詳細敘述 -->
 
-    {% if question[3] %}
-        <h3>回答：</h3>
-        <p>{{ question[3] }}</p> <!-- 回答內容 -->
+        
+        {% if question[3] %}
+            <h3>回答：</h3>
+            <p>{{ question[3] }}</p> <!-- 回答內容 -->
 
-        <form method="POST">
-            <textarea name="answer" placeholder="輸入您的回答" required></textarea>
-            <button type="submit" class = "back-home">重新提交回答</button>
+            <form method="POST">
+                <textarea name="answer" placeholder="輸入您的回答" required></textarea>
+                <button type="submit" class = "back-home">重新提交回答</button>
+            </form>
+
+        {% else %}
+            <h3>尚未有回答</h3>
+            <form method="POST">
+                <textarea name="answer" placeholder="輸入您的回答" required></textarea>
+                <button type="submit" class = "back-home">提交回答</button>
+            </form>
+
+        {% endif %}
+        <form method="POST" action="/delete/{{ question[0] }}">
+            <button type="submit" class = "back-home">刪除此問題</button>
         </form>
-
-    {% else %}
-        <h3>尚未有回答</h3>
-        <form method="POST">
-            <textarea name="answer" placeholder="輸入您的回答" required></textarea>
-            <button type="submit" class = "back-home">提交回答</button>
-        </form>
-
-    {% endif %}
-    <form method="POST" action="/delete/{{ question[0] }}">
-        <button type="submit" class = "back-home">刪除此問題</button>
-    </form>
+    </div>
 
     <div class="back-home">
         <a href="{{ url_for('index') }}">返回主頁</a>

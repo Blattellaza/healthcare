@@ -76,14 +76,14 @@ body {
     font-family: Arial, sans-serif;
     display: flex; /* 使用 Flexbox 佈局 */
     flex-direction: column; /* 垂直排列子元素 */
-    align-items: center;
+    align-items: left;
 }
 
 .upper_container{
     width: 100%;
     height: 200px;
     padding-bottom: 50px;
-
+    align-items: center;
     /*背景*/
     /* background-color: lightgray; */
     background-size: cover;
@@ -119,6 +119,8 @@ body {
     text-align: left;
     margin: 20px;
     padding: 20px;
+    font-size: 1.0em;
+    font-family: "LXGW WenKai TC", cursive;
 }
 .lower_container_index_right{
     width: 70%;
@@ -255,6 +257,8 @@ label, input, button {
     width: 100%;
     height: 100%;
 }
+
+/*表格=========================================================*/
 #health-qa {
     margin: 20px;
     padding: 20px;
@@ -263,7 +267,7 @@ label, input, button {
 
 .qa-header, .qa-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;  /* 使欄位平均分配 */
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
@@ -271,13 +275,20 @@ label, input, button {
 .qa-header {
     font-weight: bold;
     background-color: #f5f5f5;
+    text-align: center;
 }
 
-.qa-item span {
-    flex: 1; /* 平均分配空間 */
+.qa-item {
+    text-align: center;
+}
+
+.qa-header span, .qa-item span {
+    flex: 1;  /* 讓每個欄位平均分配空間 */
+}
+
+.qa-item span:first-child, .qa-header span:first-child {
     text-align: left;
 }
-
-.qa-item span:last-child {
-    text-align: right; /* 將操作按鈕靠右對齊 */
+.qa-item span:last-child, .qa-header span:last-child {
+    text-align: right;
 }
