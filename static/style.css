@@ -5,6 +5,22 @@ body {
     align-items: center;
 }
 
+.back-home {
+    margin-top: 20px;
+    text-align: center;
+}
+.back-home a {
+    text-decoration: none;
+    color: white;
+    background-color: #264653;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+.back-home a:hover {
+    background-color: #2A9D8F;
+}
+
 @keyframes bounce {
     0% {
         transform: translateY(0);
