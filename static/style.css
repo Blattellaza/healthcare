@@ -1,26 +1,54 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex; /* 使用 Flexbox 佈局 */
-    flex-direction: column; /* 垂直排列子元素 */
-    align-items: center;
-}
 
+/*buttons=================================================================*/
 .back-home {
     margin-top: 20px;
     text-align: center;
-}
-.back-home a {
-    text-decoration: none;
-    color: white;
-    background-color: #264653;
+    text-decoration: none; /* 移除底線 */
+    color: white; /* 設定文字顏色為白色 */
+    background-color: #264653; /* 背景顏色 */
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 1.2em;
-}
-.back-home a:hover {
-    background-color: #2A9D8F;
+    border: none;
+    outline: none;
+
+    display: inline-block; /* 使連結有塊狀按鈕的外觀 */
+    cursor: pointer; /* 鼠標變為點擊手勢 */
 }
 
+.back-home a{
+    text-decoration: none;
+    color: white;
+}
+
+.back-home a:visited {
+    color: white; /* 強制訪問過的連結顯示為白色 */
+}
+
+.back-home:hover {
+    background-color: #2a9d8f; /* 滑鼠懸停時的背景色 */
+    color: white; /* 保持文字顏色為白色 */
+}
+
+button {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none; /* 移除底線 */
+    color: white; /* 設定文字顏色為白色 */
+    background-color: #264653; /* 背景顏色 */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    display: inline-block; /* 使連結有塊狀按鈕的外觀 */
+    cursor: pointer; /* 鼠標變為點擊手勢 */
+}
+
+button:hover {/*滑鼠停留在button上的顏色*/
+    background-color: #2a9d8f; /* 滑鼠懸停時的背景色 */
+    color: white; /* 保持文字顏色為白色 */
+}
+
+/*Anime=================================================================*/
 @keyframes bounce {
     0% {
         transform: translateY(0);
@@ -41,6 +69,14 @@ body {
 
 .anime-text {
     animation: bounce 1s ease forwards; /* 動畫只執行一次，並保持在結束狀態 */
+}
+
+/*blooks display==================================================================*/
+body {
+    font-family: Arial, sans-serif;
+    display: flex; /* 使用 Flexbox 佈局 */
+    flex-direction: column; /* 垂直排列子元素 */
+    align-items: center;
 }
 
 .upper_container{
@@ -124,17 +160,6 @@ form {
 label, input, button {
     margin: 10px 0;
     padding: 10px;
-}
-
-button {
-    background-color: #264653;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {/*滑鼠停留在button上的顏色*/
-    background-color: #2A9D8F;
 }
 
 .advice {
