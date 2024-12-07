@@ -164,6 +164,9 @@ def question_detail(question_id):
     cursor.execute("SELECT id, problem_subject, problem_detail, answer_detail, problem_status FROM HealthQA WHERE id = ?", (question_id,))
     question = cursor.fetchone()
 
+    if not question:
+        return "問題未找到", 404  # 如果没有找到问题
+    
     if request.method == "POST":  # 處理新增回答
         answer = request.form["answer"]
         cursor.execute("""
@@ -182,24 +185,12 @@ def question_detail(question_id):
 def delete_question(question_id):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
+
+    # 获取问题详细信息
     cursor.execute("DELETE FROM HealthQA WHERE id = ?", (question_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("index"))
-
-# @app.route('/edit/<int:question_id>', methods=['POST'])
-# def edit_answer(question_id):
-#     # 获取问题并显示当前回答（假设有 question_model 查询）
-#     question = get_question_by_id(question_id)
-    
-#     # 显示一个表单让用户编辑回答
-#     if request.method == 'POST':
-#         new_answer = request.form['answer']
-#         update_answer_in_db(question_id, new_answer)  # 更新数据库中的回答
-#         return redirect(url_for('question_page', question_id=question_id))
-
-#     return render_template('edit_answer.html', question=question)  # 编辑页面
-
 
 if __name__ == '__main__':
     app.run(debug=True)
