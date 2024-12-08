@@ -92,6 +92,7 @@
                             {% endfor %}
                         </ul>
                     </div>
+
                     <!-- 加入了解 GI 值的按鈕 -->
                     {% if '血糖太高>140' in fontLargestStrong.blood_sugar[0] %}
                     <div class="gi-link">
@@ -101,36 +102,36 @@
                 {% endif %}
             </div>
             
-
-<!-- BMI 建議 -->
-<!-- BMI 建議 -->
 <!-- BMI 建議 -->
 <div class="advice-section">
     <h2>BMI:</h2>
     {% if fontLargestStrong.bmi or fontSecondStrong.bmi or fontNormalStrong.bmi or fontNormal.bmi %}
         <div class="advice">
-            <!-- font-largest-strong -->
             <ul class="font-largest-strong">
                 {% for advice in fontLargestStrong.bmi %}
                     <li><strong>{{ advice }}</strong></li>
                 {% endfor %}
             </ul>
-
-            <!-- font-second-strong -->
             <ul class="font-second-strong">
-                {% for advice in fontSecondStrong.bmi %}
+                {% for advice in fontSecondStrong.bmi[:1] %}
                     <li>{{ advice }}</li>
                 {% endfor %}
             </ul>
-
-            <!-- font-normal-strong -->
             <ul class="font-normal-strong">
-                {% for advice in fontNormalStrong.bmi %}
+                {% for advice in fontNormalStrong.bmi[:3] %}
                     <li>{{ advice }}</li>
                 {% endfor %}
             </ul>
-
-            <!-- font-normal -->
+            <ul class="font-second-strong">
+                {% for advice in fontSecondStrong.bmi[1:] %}
+                    <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
+            <ul class="font-normal-strong">
+                {% for advice in fontNormalStrong.bmi[3:] %}
+                    <li>{{ advice }}</li>
+                {% endfor %}
+            </ul>
             <ul class="font-normal">
                 {% for advice in fontNormal.bmi %}
                     <li>{{ advice }}</li>
@@ -145,7 +146,7 @@
         </div>
 
         <!-- 回主頁按鈕 -->
-        <div class="aling_two_buttom">
+        <div class="align_buttons">
             <div class="back-home">
                 <a href="{{ url_for('index') }}">返回主頁</a>
             </div>

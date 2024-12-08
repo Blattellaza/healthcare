@@ -1,16 +1,38 @@
-<form method="POST">
-    <label for="subject">問題主旨：</label>
-    <input type="text" name="subject" id="subject" required>
+<head>
+    <style>
+        .question_display_container{
+            background: lightgray;
+            margin: 20px;
+            padding: 20px;
+        }
+        .block{
+            background-color: #f5f5f5;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class = "question_display_container">
+        <form method="POST">
+            <h2>我要問問題</h2>
+            <label for="subject">問題主旨：</label>
+            <input type="text" name="subject" id="subject" required>
+            
+            <label for="detail">問題詳細敘述：</label>
+            <textarea name="detail" id="detail" required></textarea>
+            
+            <label for="type">問題類型：</label>
+            <select name="type" id="type">
+                <option value="一般健康">一般健康</option>
+                <option value="慢性病">慢性病</option>
+                <option value="其他">其他</option>
+            </select>
+            
+            <button type="submit">發佈</button>
+        </form>
+    </div>
     
-    <label for="detail">問題詳細敘述：</label>
-    <textarea name="detail" id="detail" required></textarea>
-    
-    <label for="type">問題類型：</label>
-    <select name="type" id="type">
-        <option value="一般健康">一般健康</option>
-        <option value="慢性病">慢性病</option>
-        <option value="其他">其他</option>
-    </select>
-    
-    <button type="submit">發佈</button>
-</form>
+</body>
+
