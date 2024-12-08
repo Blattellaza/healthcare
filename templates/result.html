@@ -94,11 +94,10 @@
                     </div>
 
                     <!-- 加入了解 GI 值的按鈕 -->
-                    {% if '血糖太高>140' in fontLargestStrong.blood_sugar[0] %}
-                    <div class="gi-link">
-                        <a href="{{ url_for('GI') }}" class="btn btn-info">點我了解GI值</a>
-                    </div>
+                    {% if '血糖太高' in fontLargestStrong.blood_sugar[1] %}
+                        <a href="{{ url_for('GI') }}" >點我了解GI值</a>
                     {% endif %}
+
                 {% endif %}
             </div>
             

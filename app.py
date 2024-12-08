@@ -144,7 +144,7 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
         fontLargestStrong['bmi'].append("（沒有身高或體重資料）")
         fontSecondStrong['bmi'].append("！注意！請完整輸入數據以獲得準確的建議！")
 
-
+    print(fontLargestStrong['blood_sugar'])
     return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
 
 
@@ -244,3 +244,4 @@ def delete_question(question_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
