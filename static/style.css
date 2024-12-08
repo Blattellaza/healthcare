@@ -73,7 +73,7 @@ button:hover {/*滑鼠停留在button上的顏色*/
 
 /*blooks display==================================================================*/
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     display: flex; /* 使用 Flexbox 佈局 */
     flex-direction: column; /* 垂直排列子元素 */
     align-items: left;
