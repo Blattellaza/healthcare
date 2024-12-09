@@ -155,7 +155,7 @@ def index():
     cursor = conn.cursor()
     cursor.execute("SELECT id, problem_subject, problem_type, problem_lastEditDate, problem_status FROM HealthQA ORDER BY problem_lastEditDate DESC")
     questions = cursor.fetchall()
-    print(questions)
+    #print(questions)
     conn.close()
     return render_template("index.html", questions=questions)
 
@@ -214,7 +214,7 @@ def question_detail(question_id):
     # 獲取問題詳細資訊
     cursor.execute("SELECT id, problem_subject, problem_type, problem_detail, answer_detail, problem_status FROM HealthQA WHERE id = ?", (question_id,))
     question = cursor.fetchone()
-    print(question)
+    #print(question)
 
     if not question:
         return "問題未找到", 404  # 如果没有找到问题
