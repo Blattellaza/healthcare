@@ -19,7 +19,8 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+    init_db()  # 執行資料庫初始化
     print("資料表已初始化完成！")
 
-if __name__ == "__main__":
-    init_db()  # 執行資料庫初始化
+
+    

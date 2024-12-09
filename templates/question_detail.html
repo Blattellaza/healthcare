@@ -26,15 +26,15 @@
         <div class = "question_display_container">
             <h2>提問主旨：{{ question[1] }}</h2>
             <h7>類型：</h7>
-            <h7>{{ question[4] }}</h7><br>
+            <h7>{{ question[2] }}</h7><br>
             <h3>問題詳細敘述：</h3><br>
-            <div class = "block" style="width: 100%; margin: 0px; padding: 10px;">
-                <p>{{ question[2] }}</p> <!-- 問題詳細敘述 -->
+            <div class = "block" style="margin: 0px; padding: 10px;">
+                <p>{{ question[3] }}</p> <!-- 問題詳細敘述 -->
             </div>
             
     
             
-            {% if question[3] %}
+            {% if question[4] %}
                 <h3>回答：</h3>
                 <div class = "block" style="width: 100%; margin: 0px; padding: 10px;">
                     <p>{{ question[3] }}</p> <!-- 回答內容 -->
@@ -58,7 +58,7 @@
             <form method="POST" action="/delete/{{ question[0] }}">
                 <button type="submit" class = "back-home">刪除此問題</button>
             </form>
-            <div class="back-home">
+            <div class="back-home" style="width: 97%;">
                 <a href="{{ url_for('index') }}">返回主頁</a>
             </div> 
         </div>
