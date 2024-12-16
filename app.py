@@ -7,15 +7,21 @@ DATABASE = 'database.db'  # 資料庫檔案路徑
 
 # 設定健康建議的函數
 def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height, weight):
+
+    health_point = 5
     # 將建議按健康指標分成字典形式
-    fontLargestStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
-    fontSecondStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
-    fontNormalStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
-    fontNormal = {'blood_pressure': [], 'blood_sugar': [], 'bmi': []}
-    
+    fontLargestStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': [], 'share': []}
+    fontSecondStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': [], 'share': []}
+    fontNormalStrong = {'blood_pressure': [], 'blood_sugar': [], 'bmi': [], 'share': []}
+    fontNormal = {'blood_pressure': [], 'blood_sugar': [], 'bmi': [], 'share': []}
+    fontNormalStrong['share'].append("<<< 今日宜 >>>")
     # 血壓建議
     if isinstance(blood_pressure_in, float) and isinstance(blood_pressure_out, float) :
         if blood_pressure_in > 120  or blood_pressure_out > 80:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("低鹽飲食")
+            # result page
             fontLargestStrong['blood_pressure'].append(f"你的血壓為{blood_pressure_in}/{blood_pressure_out} mmHg")
             fontLargestStrong['blood_pressure'].append("血壓太高(・-・ꐦ)！")
             fontSecondStrong['blood_pressure'].append("！注意！")
@@ -27,7 +33,12 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_pressure'].append("3.低鹽飲食：減少鈉鹽的攝取，可使血壓下降，飲食宜採清淡，盡量避免食用醃漬食物。")
             fontNormalStrong['blood_pressure'].append("4.控制飲酒：喝酒會使高血壓藥物失去療效。要避免血壓上升，飲酒量不宜超過30公克酒精。")
             fontNormalStrong['blood_pressure'].append("5.規律運動：每天30分鐘，一個星期最好五次以上，做一些安全溫和的有氧運動，可以改善血壓過高問題。")
+            
         elif blood_pressure_in < 90 or  blood_pressure_out < 60:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("多喝水")
+            # result page
             fontLargestStrong['blood_pressure'].append(f"你的血壓為{blood_pressure_in}/{blood_pressure_out} mmHg")
             fontLargestStrong['blood_pressure'].append("血壓太低(・-・ꐦ)！")
             fontSecondStrong['blood_pressure'].append("！注意！")
@@ -42,6 +53,9 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
         elif blood_pressure_in > 120 and blood_pressure_out < 60 or blood_pressure_in < 90 and blood_pressure_out > 80:
             fontLargestStrong['blood_pressure'].append("資訊輸入錯誤")
         else:
+            # share page
+            health_point = health_point + 1
+            # result page
             fontLargestStrong['blood_pressure'].append(f"你的血壓為{blood_pressure_in}/{blood_pressure_out} mmHg")
             fontLargestStrong['blood_pressure'].append("血壓正常٩(*´ ꒳ `*)۶")
             fontSecondStrong['blood_pressure'].append("！太棒了！")
@@ -57,6 +71,10 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
     # 血糖建議
     if isinstance(blood_sugar, float):
         if blood_sugar > 140:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("不吃高GI食物")
+            # result page
             fontLargestStrong['blood_sugar'].append(f"你的血糖為{blood_sugar} mg/dL")
             fontLargestStrong['blood_sugar'].append("血糖太高(・-・ꐦ)！")
             fontSecondStrong['blood_sugar'].append("！注意！")
@@ -69,6 +87,10 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_sugar'].append("3. 避免吃高油脂食物，選擇植物油來替代動物性脂肪（如：豬油、牛油、奶油、培根等）。")
             fontNormalStrong['blood_sugar'].append("4. 避免吃高鈉食物，並避免過度飲酒。")
         elif blood_sugar < 70:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("定時三餐")
+            #result page
             fontLargestStrong['blood_sugar'].append(f"你的血糖為{blood_sugar} mg/dL")
             fontLargestStrong['blood_sugar'].append("血糖太低(・-・ꐦ)！")
             fontSecondStrong['blood_sugar'].append("！注意！")
@@ -83,6 +105,9 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['blood_sugar'].append("運動：空腹運動、過度運動等。")
             fontNormalStrong['blood_sugar'].append("如果長時間處於低血糖狀態，建議就醫。")
         else:
+            # share page
+            health_point = health_point + 1
+            #result page
             fontLargestStrong['blood_sugar'].append(f"你的血糖為{blood_sugar} mg/dL")
             fontLargestStrong['blood_sugar'].append("血糖正常٩(*´ ꒳ `*)۶")
             fontSecondStrong['blood_sugar'].append("！太棒了！")
@@ -98,6 +123,10 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
     if isinstance(weight, float) and isinstance(height, float):
         bmi = round(weight / (height / 100) ** 2, 2)
         if bmi >= 27:
+            # share page
+            health_point = health_point - 2
+            fontNormalStrong['share'].append("多多多多多運動")
+            # result page
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} kg/m\u00B2")
             fontLargestStrong['bmi'].append("肥胖(・-・ꐦ)！")
             fontSecondStrong['bmi'].append("！注意！")
@@ -109,6 +138,10 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['bmi'].append("3.增加有氧運動（如快走、慢跑或騎自行車），每週至少進行150分鐘，幫助燃燒熱量。")
             fontNormalStrong['bmi'].append("4.每餐適量控制，避免暴飲暴食，並養成規律的飲食習慣，避免宵夜。")
         elif 24 <= bmi < 27:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("拒絕久坐")
+            #result page
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} kg/m\u00B2")
             fontLargestStrong['bmi'].append("過重(・-・ꐦ)！")
             fontSecondStrong['bmi'].append("！注意！")
@@ -120,6 +153,9 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['bmi'].append("3.每天堅持運動，如散步、快走、爬樓梯等，逐步養成運動習慣。")
             fontNormalStrong['bmi'].append("4.避免久坐，建議每隔一段時間起身活動，讓身體保持活力。")
         elif 18.5 <= bmi < 24:
+            # share page
+            health_point = health_point + 1
+            # result page
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} kg/m\u00B2")
             fontLargestStrong['bmi'].append("健康體重٩(*´ ꒳ `*)۶")
             fontSecondStrong['bmi'].append("！太棒了！")
@@ -130,6 +166,10 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
             fontNormalStrong['bmi'].append("3.定期檢查體重，以便及時調整生活習慣，防止體重波動。")
             fontNormalStrong['bmi'].append("PS.也要定期回來做檢測喔 ⑉˙ᗜ˙⑉ ")
         else:
+            # share page
+            health_point = health_point - 1
+            fontNormalStrong['share'].append("吃飽飽")
+            # result page
             fontLargestStrong['bmi'].append(f"你的BMI為{bmi} kg/m\u00B2")
             fontLargestStrong['bmi'].append("過輕(・-・ꐦ)！")
             fontSecondStrong['bmi'].append("！注意！")
@@ -144,7 +184,21 @@ def get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height
         fontLargestStrong['bmi'].append("（沒有身高或體重資料）")
         fontSecondStrong['bmi'].append("！注意！請完整輸入數據以獲得準確的建議！")
 
-    print(fontLargestStrong['blood_sugar'])
+    #print(fontLargestStrong['blood_sugar'])
+    
+    if health_point == 5 + 3:
+        fontNormalStrong['share'].append("到問答區分享你的健康密技")
+        fontNormalStrong['share'].append("獲得稱號：健康老司機")
+    elif 5 < health_point <= 7:
+        fontNormalStrong['share'].append("繼續保持")
+        fontNormalStrong['share'].append("獲得稱號：健康寶寶")
+    elif 3 < health_point <= 5:
+        fontNormalStrong['share'].append("向健康小幫手學習健康秘訣")
+        fontNormalStrong['share'].append("獲得稱號：新手健康駕駛")
+    elif 1 <= health_point <= 3:
+        fontNormalStrong['share'].append("好好注意身體健康！")
+        fontNormalStrong['share'].append("獲得稱號：健康菜鳥")
+    fontNormalStrong['share'].append(f"今日健康評分：{health_point}")
     return fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal
 
 
@@ -179,6 +233,35 @@ def result():
         fontNormalStrong=fontNormalStrong,
         fontNormal=fontNormal
     )
+
+#share
+# @app.route('/share', methods=['GET'])
+# def share():
+#     # 模擬固定數據，或者可以根據需求實現更動態的邏輯
+#     fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal = get_health_advice(120, 80, 70, 170, 65)
+#     return render_template('share.html', fontNormalStrong=fontNormalStrong)
+
+
+@app.route('/share', methods=['GET', 'POST'])
+def share():
+    # 使用 POST 接受用戶輸入，或者使用 GET 來獲取一些默認數據
+    if request.method == 'POST':
+        blood_pressure_in = float(request.form.get('blood_pressure_in')) if request.form.get('blood_pressure_in') else None
+        blood_pressure_out = float(request.form.get('blood_pressure_out')) if request.form.get('blood_pressure_out') else None
+        blood_sugar = float(request.form.get('blood_sugar')) if request.form.get('blood_sugar') else None
+        height = float(request.form.get('height')) if request.form.get('height') else None
+        weight = float(request.form.get('weight')) if request.form.get('weight') else None
+    else:
+        # 默認值或基於 session 的值
+        blood_pressure_in = 120
+        blood_pressure_out = 80
+        blood_sugar = 70
+        height = 170
+        weight = 65
+
+    fontLargestStrong, fontSecondStrong, fontNormalStrong, fontNormal = get_health_advice(blood_pressure_in, blood_pressure_out, blood_sugar, height, weight)
+    
+    return render_template('share.html', fontNormalStrong=fontNormalStrong)
 
 # 新增 GI 值介紹頁面的路由
 @app.route('/GI')

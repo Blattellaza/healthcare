@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>share</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- 字體 （google front LXGW WenKai TC Static） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="share_box_display">
+        <div class = "share_box" style = "text-align: center;">
+            <h2><br>每日健康一測</h2>
+            <ul class="font-normal-strong">
+                {% for advice in fontNormalStrong.share %}
+                    <li><strong>{{ advice }}</strong></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

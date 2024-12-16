@@ -296,3 +296,19 @@ label, input, button {
 .qa-item span:last-child, .qa-header span:last-child {
     text-align: right;
 }
+.share_box_display{
+    background-size: cover;
+    background-image: url('https://www.mattpaynephotography.com/images/xl/Preventative-MedicineFebruary-05-2020.webp');
+    height: 97vh;   
+}
+.share_box{
+    position: absolute;  /* 绝对定位 */
+    top: 50%;  /* 垂直居中 */
+    left: 50%;  /* 水平居中 */
+    transform: translate(-50%, -50%);  /* 使用 transform 移动至完全居中 */
+    margin: 20px;
+    height: 500px;
+    width: 300px;
+    text-align: center;
+    background: lightgray;
+}

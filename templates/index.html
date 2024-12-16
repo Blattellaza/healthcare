@@ -34,7 +34,7 @@
 
         </div>
 
-        <div class="lower_container_index_right">
+        <!-- <div class="lower_container_index_right">
             <form method="POST" action="{{ url_for('result') }}">
 
                 <div class="flexbox">
@@ -60,7 +60,59 @@
                 <button type="submit" class="back-home">取得健康建議</button>
 
             </form>
+        </div> -->
+        <div class="lower_container_index_right">
+            <form id="healthForm" method="POST" action="{{ url_for('result') }}">
+                <div class="flexbox">
+                    <label for="blood_pressure">收縮壓(mmHg):</label>
+                    <input type="number" id="blood_pressure_in" name="blood_pressure_in" step="0.1">
+                    <label for="blood_pressure">舒張壓(mmHg):</label>
+                    <input type="number" id="blood_pressure_out" name="blood_pressure_out" step="0.1">
+                </div>
+        
+                <div class="flexbox">
+                    <label for="blood_sugar">血糖(mg/dL):</label>
+                    <input type="number" id="blood_sugar" name="blood_sugar" step="0.1">
+                </div>
+        
+                <div class="flexbox">
+                    <label for="bmi">身高(cm):</label>
+                    <input type="number" id="height" name="height" step="0.1">
+                    
+                    <label for="bmi">體重(kg):</label>
+                    <input type="number" id="weight" name="weight" step="0.1">
+                </div>
+        
+                <button type="button" onclick="submitToBoth()">取得健康建議</button>
+            </form>
+        
+            <!-- 隱藏的表單，用來提交到 share -->
+            <form id="shareForm" method="POST" action="{{ url_for('result') }}" style="display: none;">
+                <!-- 可以在這裡加入需要分享的額外數據 -->
+                <input type="hidden" name="blood_pressure_in" id="blood_pressure_in_share">
+                <input type="hidden" name="blood_pressure_out" id="blood_pressure_out_share">
+                <input type="hidden" name="blood_sugar" id="blood_sugar_share">
+                <input type="hidden" name="height" id="height_share">
+                <input type="hidden" name="weight" id="weight_share">
+            </form>
         </div>
+        
+        <script>
+        function submitToBoth() {
+            // 把 healthForm 表單的數據複製到 shareForm 中
+            document.getElementById('blood_pressure_in_share').value = document.getElementById('blood_pressure_in').value;
+            document.getElementById('blood_pressure_out_share').value = document.getElementById('blood_pressure_out').value;
+            document.getElementById('blood_sugar_share').value = document.getElementById('blood_sugar').value;
+            document.getElementById('height_share').value = document.getElementById('height').value;
+            document.getElementById('weight_share').value = document.getElementById('weight').value;
+            
+            // 同時提交兩個表單
+            document.getElementById('healthForm').submit();
+            document.getElementById('shareForm').submit();
+        }
+        </script>
+        
+        
 
         
     </div>
